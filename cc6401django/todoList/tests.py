@@ -14,3 +14,11 @@ class Tests(TestCase):
         # assert
         self.assertEquals(task.description, saved_task.description)
     
+    def test_new_task_view(self):
+        # arrange
+        self.client = Client()
+        task = Task(description = "Tarea_1")
+        # act
+        response = self.client.post("/tasks", {task.to_doc()})
+        # assert
+        self.assertEquals(200, response.status_code)
